@@ -4,8 +4,8 @@ public class MenuManager {
 		System.out.println("1. ");
 		System.out.println("1. ");
 		System.out.println("1. ");
-		System.out.println("1. ");
-		System.out.println("1. ");
-		System.out.println("1. ");
+		System.out.println("1. a");
+		System.out.println("1. a");
+		System.out.println("1. a");
 	}
 }
