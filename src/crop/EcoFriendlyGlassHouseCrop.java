@@ -2,11 +2,11 @@ package crop;
 
 import java.util.Scanner;
 
-public class GlassHouseCrop extends Crop {
+public class EcoFriendlyGlassHouseCrop extends Crop {
 	
 	protected boolean boiler;
 	
-	public GlassHouseCrop(CropKind kind) {
+	public EcoFriendlyGlassHouseCrop(CropKind kind) {
 		super(kind);
 	}
 	

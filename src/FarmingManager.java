@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import crop.Crop;
+import crop.CropKind;
+import crop.EcoFriendlyBareGroundCrop;
+import crop.EcoFriendlyGlassHouseCrop;
 import crop.GlassHouseCrop;
 
 public class FarmingManager {
@@ -17,22 +20,36 @@ public class FarmingManager {
 		while(kind != 1 && kind != 2) {
 			System.out.println("1. Bare Ground");
 			System.out.println("2. Glass House");
-			System.out.print("Select num for Groud Kind between 1 and 2:");
+			System.out.println("3. Eco-friendly Bare Ground");
+			System.out.println("4. Eco-friendly Glass House");
+			System.out.print("Select num for Groud Kind between 1 and 4:");
 			kind = input.nextInt();
 			if (kind == 1) {
-				crop = new Crop();
+				crop = new Crop(CropKind.BareGround);
 				crop.getUserInput(input); //작물의 정보 5가지 입력받기
 				crops.add(crop);  //crops collection에 crop 추가
 				break;
 			}
 			else if(kind == 2) {
-				crop = new GlassHouseCrop(); 
+				crop = new GlassHouseCrop(CropKind.GlassHouse); 
+				crop.getUserInput(input); //작물의 정보 5가지 입력받기
+				crops.add(crop);  //crops collection에 crop 추가
+				break;
+			}
+			else if(kind == 3) {
+				crop = new EcoFriendlyBareGroundCrop(CropKind.EcoFriendlyBareGround); 
+				crop.getUserInput(input); //작물의 정보 5가지 입력받기
+				crops.add(crop);  //crops collection에 crop 추가
+				break;
+			}
+			else if(kind == 4) {
+				crop = new EcoFriendlyGlassHouseCrop(CropKind.EcoFriendlyGlassHouse); 
 				crop.getUserInput(input); //작물의 정보 5가지 입력받기
 				crops.add(crop);  //crops collection에 crop 추가
 				break;
 			}
 			else {
-				System.out.print("Select num for Groud Kind between 1 and 2:");
+				System.out.print("Select num for Groud Kind between 1 and 4:");
 			}
 		}
 	}
@@ -110,8 +127,6 @@ public class FarmingManager {
 	}
 
 	public void viewCrops() {
-//		System.out.print("Crop Name:");
-//		String cropName = input.next();
 		System.out.println("# of registered crops:" + crops.size());
 		for(int i=0; i<crops.size(); i++) {
 			crops.get(i).printInfo();
