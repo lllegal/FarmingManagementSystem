@@ -2,7 +2,7 @@ package crop;
 
 import java.util.Scanner;
 
-public class EcoFriendlyGlassHouseCrop extends Crop {
+public class EcoFriendlyGlassHouseCrop extends Crop implements CropInput {
 	
 	protected boolean boiler;
 	
