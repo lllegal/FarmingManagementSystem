@@ -2,6 +2,8 @@ package crop;
 
 import java.util.Scanner;
 
+import exception.LevelFormatException;
+
 public class EcoFriendlyGlassHouseCrop extends Crop implements CropInput {
 	
 	protected boolean boiler;
@@ -19,25 +21,11 @@ public class EcoFriendlyGlassHouseCrop extends Crop implements CropInput {
 	}
 	
 	public void getUserInput(Scanner input) {
-		System.out.print("Crop Name:");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("Consumable Nutrient:");
-		int nutrient = input.nextInt();
-		this.setNutrient(nutrient);
-		
-		System.out.print("Crop Level:");
-		int level = input.nextInt();
-		this.setLevel(level);
-		
-		System.out.print("Cultivation Period(days):");
-		int period = input.nextInt();
-		this.setPeriod(period);
-		
-		System.out.print("The best month to plant:");
-		String seeding = input.next();
-		this.setSeeding(seeding);
+		setCropName(input);
+		setCropNut(input);
+		setCropLevel(input);
+		setCropPeriod(input);
+		setCropSeeding(input);
 		
 		System.out.print("Boiler in GlassHouse(Y/N):");
 		String answer = input.next();

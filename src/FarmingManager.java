@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import crop.Crop;
 import crop.CropInput;
 import crop.CropKind;
 import crop.EcoFriendlyBareGroundCrop;
 import crop.EcoFriendlyGlassHouseCrop;
 import crop.GlassHouseCrop;
+import exception.LevelFormatException;
 
 public class FarmingManager {
 	ArrayList<CropInput> crops = new ArrayList<CropInput>(); //Crop타입의 변수를 저장하는 ArrayList 생성
@@ -18,33 +19,41 @@ public class FarmingManager {
 	public void addCrop() {
 		int kind = 0;
 		CropInput cropInput;
-		while(kind != 1 && kind != 2) {
-			//System.out.println("1. Bare Ground");
-			System.out.println("1. Glass House");
-			System.out.println("2. Eco-friendly Bare Ground");
-			System.out.println("3. Eco-friendly Glass House");
-			System.out.print("Select num for Groud Kind between 1 and 3:");
-			kind = input.nextInt();
-			if(kind == 1) {
-				cropInput = new GlassHouseCrop(CropKind.GlassHouse); 
-				cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
-				crops.add(cropInput);  //crops collection에 cropInput 추가
-				break;
-			}
-			else if(kind == 2) {
-				cropInput = new EcoFriendlyBareGroundCrop(CropKind.EcoFriendlyBareGround); 
-				cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
-				crops.add(cropInput);  //crops collection에 cropInput 추가
-				break;
-			}
-			else if(kind == 3) {
-				cropInput = new EcoFriendlyGlassHouseCrop(CropKind.EcoFriendlyGlassHouse); 
-				cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
-				crops.add(cropInput);  //crops collection에 cropInput 추가
-				break;
-			}
-			else {
-				System.out.print("Select num for Groud Kind between 1 and 4:");
+		while(kind < 1 || kind > 3) {
+			try {
+				//System.out.println("1. Bare Ground");
+				System.out.println("1. Glass House");
+				System.out.println("2. Eco-friendly Bare Ground");
+				System.out.println("3. Eco-friendly Glass House");
+				System.out.print("Select num for Groud Kind between 1 and 3:");
+				kind = input.nextInt();
+				if(kind == 1) {
+					cropInput = new GlassHouseCrop(CropKind.GlassHouse); 
+					cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
+					crops.add(cropInput);  //crops collection에 cropInput 추가
+					break;
+				}
+				else if(kind == 2) {
+					cropInput = new EcoFriendlyBareGroundCrop(CropKind.EcoFriendlyBareGround); 
+					cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
+					crops.add(cropInput);  //crops collection에 cropInput 추가
+					break;
+				}
+				else if(kind == 3) {
+					cropInput = new EcoFriendlyGlassHouseCrop(CropKind.EcoFriendlyGlassHouse); 
+					cropInput.getUserInput(input); //작물의 정보 5가지 입력받기
+					crops.add(cropInput);  //crops collection에 cropInput 추가
+					break;
+				}
+				else {
+					System.out.println("Plz put an integer between 1 and 3!");
+				}
+			}catch(InputMismatchException e) {
+				System.out.println("Plz put an integer between 1 and 3!");
+				if(input.hasNext()) {
+					input.next();
+				}
+				kind = -1;
 			}
 		}
 	}
@@ -100,7 +109,11 @@ public class FarmingManager {
 					else if (num == 3) { 
 						System.out.print("Crop Level:");
 						int level = input.nextInt();
-						cropInput.setLevel(level);
+						try {
+							cropInput.setLevel(level);
+						} catch (LevelFormatException e) {
+							System.out.println("Incorrect Level. Put crop's level between 1-99");
+						}
 					}
 					else if (num == 4) {
 						System.out.print("Cultivation Period(days):");

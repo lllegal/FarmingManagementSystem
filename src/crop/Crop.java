@@ -2,6 +2,8 @@ package crop;
 
 import java.util.Scanner;
 
+import exception.LevelFormatException;
+
 public abstract class Crop {
 	protected CropKind kind = CropKind.BareGround;
 	protected String name;
@@ -67,7 +69,10 @@ public abstract class Crop {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(int level) throws LevelFormatException {
+		if(level <= 0 || level >= 100) { 
+			throw new LevelFormatException();
+		}
 		this.level = level;
 	}
 
@@ -89,5 +94,36 @@ public abstract class Crop {
 
 	public abstract void printInfo();
 
-
+	public void setCropName(Scanner input) {
+		System.out.print("Crop Name:");
+		String name = input.next();
+		this.setName(name);
+	}
+	public void setCropNut(Scanner input) {
+		System.out.print("Consumable Nutrient:");
+		int nutrient = input.nextInt();
+		this.setNutrient(nutrient);
+	}
+	public void setCropLevel (Scanner input) {
+		int level = 0;
+		while (level <= 0 || level >= 100) {
+			System.out.print("Crop Level:");
+			level = input.nextInt();
+			try {
+				this.setLevel(level);
+			} catch (LevelFormatException e) {
+				System.out.println("Incorrect Level. Put crop's level between 1-99");
+			}
+		}
+	}
+	public void setCropPeriod (Scanner input) {
+		System.out.print("Cultivation Period(days):");
+		int period = input.nextInt();
+		this.setPeriod(period);
+	}
+	public void setCropSeeding (Scanner input) {
+		System.out.print("The best month to plant:");
+		String seeding = input.next();
+		this.setSeeding(seeding);
+	}
 }
