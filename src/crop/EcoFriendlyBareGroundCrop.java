@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class EcoFriendlyBareGroundCrop extends Crop implements CropInput {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4102107348819815743L;
+
 	public EcoFriendlyBareGroundCrop(CropKind kind) {
 		super(kind);
 	}

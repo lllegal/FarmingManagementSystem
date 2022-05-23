@@ -1,3 +1,5 @@
+import java.io.Serializable; 
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,9 +11,14 @@ import crop.EcoFriendlyGlassHouseCrop;
 import crop.GlassHouseCrop;
 import exception.LevelFormatException;
 
-public class FarmingManager {
+public class FarmingManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4744239364042828948L;
+	
 	ArrayList<CropInput> crops = new ArrayList<CropInput>(); //Crop타입의 변수를 저장하는 ArrayList 생성
-	Scanner input;
+	transient Scanner input;
 	FarmingManager(Scanner input) {
 		this.input = input;
 	}

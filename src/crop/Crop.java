@@ -1,10 +1,16 @@
 package crop;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exception.LevelFormatException;
 
-public abstract class Crop {
+public abstract class Crop implements CropInput, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6076949818219059361L;
+	
 	protected CropKind kind = CropKind.BareGround;
 	protected String name;
 	protected int nutrient;

@@ -1,11 +1,14 @@
 package crop;
 
 import java.util.Scanner;
-
-import exception.LevelFormatException;
+//import exception.LevelFormatException;
 
 public class EcoFriendlyGlassHouseCrop extends Crop implements CropInput {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7020658092305109987L;
 	protected boolean boiler;
 	
 	public EcoFriendlyGlassHouseCrop(CropKind kind) {

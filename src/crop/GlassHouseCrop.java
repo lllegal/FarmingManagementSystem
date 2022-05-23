@@ -1,11 +1,14 @@
 package crop;
 
 import java.util.Scanner;
-
-import exception.LevelFormatException;
+//import exception.LevelFormatException;
 
 public class GlassHouseCrop extends Crop implements CropInput {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2638327038847760721L;
 	protected boolean boiler;
 	
 	public GlassHouseCrop(CropKind kind) {
