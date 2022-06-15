@@ -1,14 +1,24 @@
 package gui;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class CropAdder extends JFrame {
-	public CropAdder() {
+import listeners.CropAdderCancelListener;
+import listeners.CropAdderListener;
+import manager.FarmingManager;
+
+public class CropAdder extends JPanel {
+	
+	WindowFrame frame;
+	FarmingManager farmingManager;
+	 
+	public CropAdder(WindowFrame frame, FarmingManager farmingmanager) {
+		this.frame = frame;
+		this.farmingManager = farmingManager; 
+		
 		JPanel panel = new JPanel(); //패널 생성
 		panel.setLayout(new SpringLayout()); //레이아웃 설정
 
@@ -40,18 +50,24 @@ public class CropAdder extends JFrame {
 		JLabel labelSeed = new JLabel("Seed:", JLabel.TRAILING);
 		JTextField fieldSeed = new JTextField(10);
 		labelName.setLabelFor(fieldSeed);
+		
+		JButton saveButton = new JButton("save");
+		saveButton.addActionListener(new CropAdderListener(fieldName, fieldLev, fieldNut, fieldPer, fieldSeed, farmingManager));
+
+		JButton cancelButton = new JButton("cancel");
+		cancelButton.addActionListener(new CropAdderCancelListener(frame));
+		
 		panel.add(labelSeed); 
 		panel.add(fieldSeed);
 
-		panel.add(new JButton("save"));
-		panel.add(new JButton("cancel"));
+		panel.add(saveButton);
+		panel.add(cancelButton);
 		//패널에 추가
 
 		SpringUtilities.makeCompactGrid(panel, 6, 2, 2, 6, 6, 6);
 
-		this.setSize(300, 300); //프레임 크기 설정
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //창을 닫으면 프로그램이 종료되도록 함
-		this.setContentPane(panel); //프레임에 패널 추가
+
+		this.add(panel); //프레임에 패널 추가
 		this.setVisible(true); //화면에 표시
 	}
 
